@@ -54,3 +54,29 @@ int qrDecode()
 }
 
 
+//from fridays class
+//Psuedocode for another method we might want to use
+class read_in2{
+    u_int32_t length;
+    char buffer[10000];
+    //technically want to recieve in loop as well
+    recv(sock, &length, 4, 0);
+// recv length bytes
+    u_int32_t bytesRecievedSoFar = 0;
+    while (bytesRecievedSoFar < length){
+    bytesActuallyRecieve = recv(sock, (buffer+bytesRecievedSoFar/(sizeof(u_int32_t))), length-bytesRecievedSoFar, 0);
+    bytesRecievedSoFar += bytesActuallyRecieve;
+}
+    //opens file
+    file.open(filenameExample, ios::binary | ios::in);
+    //write buffer into file
+    file.write(buffer);
+    //Close file  
+    file.close();
+}
+
+
+//Decoding QR code
+if (qrDecode(filenameExample) == 0){printf ("Parsed result: %d.\n",i);
+}else{printf('invalid QR Code')}
+
