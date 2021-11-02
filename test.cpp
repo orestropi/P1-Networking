@@ -4,6 +4,24 @@
 #include <fstream>
 #include <sys/stat.h>
 #include <ios>
+#include <stdlib.h>
+#include <stdio.h>
+#include <string>
+
+using namespace std;
+
+//Decoding QR Code using Ssystem(part 2)
+int qrDecode (string imageFile)
+{
+  int i;
+  printf ("Checking if processor is available...");
+  if (system(NULL)) puts ("Ok");
+    else exit (EXIT_FAILURE);
+  printf ("Parsing QR Code ...\n");
+  i=system ("java -cp javase.jar:core.jar com.google.zxing.client.j2se.CommandLineRunner " + imageFile);
+  printf ("Parsed result: %d.\n",i);
+  return 0;
+}
 
 class read_in{
     char x;
@@ -29,3 +47,5 @@ class read_in{
     //Creates main thread and calls read function
     thred th(read, file, filename);
 }
+
+
