@@ -9,10 +9,15 @@
 #include <string>
 
 using namespace std;
-
+class read_in{
+    char x;
+    std::ifstream file; //File being passed in
+    char* filename; //file name
+    uintmax_t size = file.tellg();
 //Decoding QR Code using Ssystem(part 2)
-int qrDecode (string imageFile)
+int qrDecode()
 {
+  string imagefile = read(file,filename)
   int i;
   printf ("Checking if processor is available...");
   if (system(NULL)) puts ("Ok");
@@ -23,11 +28,7 @@ int qrDecode (string imageFile)
   return 0;
 }
 
-class read_in{
-    char x;
-    std::ifstream file; //File being passed in
-    char* filename; //file name
-    uintmax_t size = file.tellg();
+
     //Function that reads in file
     string read(std::ifstream file, char* filename)
     {
@@ -48,8 +49,8 @@ class read_in{
     }
     //makes a socket ??
     //int front = socket(domain, type, protocol)
-    //Creates main thread and calls read function
-    thred th(read, file, filename);
+    //Creates main thread and calls qrDecode function
+    std::thread th(read_in::qrDecode);
 }
 
 
