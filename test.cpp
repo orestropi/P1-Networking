@@ -29,18 +29,22 @@ class read_in{
     char* filename; //file name
     uintmax_t size = file.tellg();
     //Function that reads in file
-    void read(std::ifstream file, char* filename)
+    string read(std::ifstream file, char* filename)
     {
+        string imagefile;
         // Opening a file way 1
         //std::ifstream myfile(filename, ios::in|ios::binary);
     //opens file way 2
     file.open(filename, ios::binary | ios::in);
     //ios is a class so I don't know why thats throwing an error
     //reads in file based on size in bits -> Probably going to change to mach the ifstream
+    // Set read to imagefile variable
     file.read(&x, sizeof(x));
     //Should keep track of position in file, hopefully based on bit position
     file.seekp(0,ios::end);
    // file
+   //This is how we'll call the qr code function
+   return imagefile;
     }
     //makes a socket ??
     //int front = socket(domain, type, protocol)
