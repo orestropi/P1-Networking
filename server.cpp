@@ -12,7 +12,15 @@ using namespace std;
 int main(){
     int socketIn, newSocket;
     char buffer[1024];
-    
+
+
+
+    socketIn = socket(PF_INET, SOCK_STREAM,0);
+
+
+
+    return 0; // success
+}
     class read_in{
     char x;
     std::ifstream file; //File being passed in
@@ -83,6 +91,6 @@ class read_in2{
 //Decoding QR code
 if (qrDecode(filenameExample) == 0){printf ("Parsed result: %d.\n",i);
 }else{printf('invalid QR Code')}*/
-}
+
 
 

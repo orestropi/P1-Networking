@@ -12,8 +12,17 @@
 int main(){
     int clientSocket;
     char buffer[1024];
-   // struct sock_addr_in serverAdd;
+    // need a variable for the server address
     socklen_t address_size;
-    
+
+
+    //Connect the socket to the server
+    connect(clientSocket, /*server address*/, address_size);
+    //Recive message from the server
+    recv(clientSocket,buffer,1024,0);
+    //Add information to text file
+
+
+    return 0; //success
 
 }
