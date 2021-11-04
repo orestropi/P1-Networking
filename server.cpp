@@ -29,7 +29,7 @@ int main(){
 //Decoding QR Code using Ssystem(part 2)
 int qrDecode()
 {
-  string imagefile = read(file,filename)
+ const char imageFile = read(file,filename);
   int i;
   printf ("Checking if processor is available...");
   if (system(NULL)) puts ("Ok");
@@ -42,9 +42,9 @@ int qrDecode()
 
 
     //Function that reads in file
-    string read(std::ifstream file, char* filename)
+    const char read(std::ifstream file, char* filename)
     {
-        string imagefile;
+        const char imageFile = 0;
         // Opening a file way 1
         //std::ifstream myfile(filename, ios::in|ios::binary);
     //opens file way 2
@@ -57,12 +57,12 @@ int qrDecode()
     file.seekp(0,ios::end);
    // file
    //This is how we'll call the qr code function
-   return imagefile;
+   return imageFile;
     }
     //makes a socket ??
     //int front = socket(domain, type, protocol)
     //Creates main thread and calls qrDecode function
-    std::thread th(read_in::qrDecode);
+    std::thread decode (qrDecode);
 }
 
 /*
