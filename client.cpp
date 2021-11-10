@@ -17,7 +17,7 @@ int main(){
 
 
     //Connect the socket to the server
-    connect(clientSocket, /*server address*/, address_size);
+    connect(clientSocket, /server address/, address_size);
     //Recive message from the server
     recv(clientSocket,buffer,1024,0);
     //Add information to text file

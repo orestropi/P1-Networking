@@ -10,23 +10,39 @@
 
 using namespace std;
 int main(){
-    int socketIn, newSocket;
-    char buffer[1024];
+    //socket parent_sock=0;
+    int total = 0;
+    std::thread decode (qrDecode);
+    while (1){
+    {
+     // socket client = accept(parent_sock, 1024,1024);  
+    pid_t returnValue = fork();
 
 
-
-    socketIn = socket(PF_INET, SOCK_STREAM,0);
-
-
+    
+    }
+   
+    
 
     return 0; // success
 }
+
     class read_in{
     char x;
     std::ifstream file; //File being passed in
     char* filename; //file name
     uintmax_t size = file.tellg();
+    int socketIn, newSocket;
+    char buffer[1024];
 //Decoding QR Code using Ssystem(part 2)
+void handleClient(){
+socketIn = socket(PF_INET, SOCK_STREAM,0);
+    recv(socketIn, buffer, 4, 0);
+//read_in::read()
+    
+
+    return 0; // success
+}
 int qrDecode()
 {
  const char imageFile = read(file,filename);
@@ -54,7 +70,7 @@ int qrDecode()
     // Set read to imagefile variable
     file.read(&x, sizeof(x));
     //Should keep track of position in file, hopefully based on bit position
-    file.seekp(0,ios::end);
+    //file.seekp(0,ios::end);
    // file
    //This is how we'll call the qr code function
    return imageFile;
@@ -62,7 +78,6 @@ int qrDecode()
     //makes a socket ??
     //int front = socket(domain, type, protocol)
     //Creates main thread and calls qrDecode function
-    std::thread decode (qrDecode);
 }
 
 /*
@@ -91,6 +106,3 @@ class read_in2{
 //Decoding QR code
 if (qrDecode(filenameExample) == 0){printf ("Parsed result: %d.\n",i);
 }else{printf('invalid QR Code')}*/
-
-
-
