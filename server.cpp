@@ -72,6 +72,11 @@ int qrDecode()
     //Function that reads in file
     const char read(std::ifstream file, char* filename)
     {
+        int upperBound = 1431655765; //A third of 4 GB
+        if(file.tellg()-1>upperBound){
+            int errorSocket = socket(1,0,0);
+            connect(errorSocket, /*client address,address size*/);
+        }
         const char imageFile = 0;
         // Opening a file way 1
         //std::ifstream myfile(filename, ios::in|ios::binary);
