@@ -21,7 +21,9 @@ int main(){
     //Recive message from the server
     recv(clientSocket,buffer,1024,0);
     //Add information to text file
-
+    std::ofstream outfile ("test.txt");
+    outfile << buffer << std::endl;
+    outfile.close();
 
     return 0; //success
 
