@@ -10,6 +10,7 @@
 #include <sys/wait.h>
 #include <unistd.h>
 
+
 using namespace std;
 int main(){
     int parent_sock=0;
@@ -41,6 +42,7 @@ int main(){
 }
 
 class read_in{
+    public:
     char x;
     std::ifstream file; //File being passed in
     char* filename; //file name
@@ -61,7 +63,7 @@ socketIn = socket(PF_INET, SOCK_STREAM,0);
     }
 
 
-    //char* URL = qrDecode
+    char* URL = qrDecode();
 //read_in::read()
     buffer = qrDecode()
 //send URL
@@ -69,17 +71,17 @@ socketIn = socket(PF_INET, SOCK_STREAM,0);
 
     return 0; // success
 }
-int qrDecode()
+char* qrDecode()
 {
  const char imageFile = read(file,filename);
-  int i;
+  char* i;
   printf ("Checking if processor is available...");
   if (system(NULL)) puts ("Ok");
     else exit (EXIT_FAILURE);
   printf ("Parsing QR Code ...\n");
-  i=system ("java -cp javase.jar:core.jar com.google.zxing.client.j2se.CommandLineRunner " + imageFile);
+  i =system ("java -cp javase.jar:core.jar com.google.zxing.client.j2se.CommandLineRunner " + imageFile);
   printf ("Parsed result: %d.\n",i);
-  return 0;
+  return i;
 }
 
 
@@ -109,7 +111,7 @@ int qrDecode()
     //makes a socket ??
     //int front = socket(domain, type, protocol)
     //Creates main thread and calls qrDecode function
-}
+};
 
 /*
 //from fridays class
