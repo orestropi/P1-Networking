@@ -12,12 +12,14 @@
 
 using namespace std;
 int main(){
-    //socket parent_sock=0;
+    int parent_sock=0;
     int total = 0;
-    std::thread decode(read_in::qrDecode);
-    while (1){
-    {
-     // socket client = accept(parent_sock, 1024,1024);  
+    struct sockaddr address;
+    int addresslen = sizeof(address);
+    int clientNum = listen(parent_sock,clientNum);
+    while(1){
+    
+    int client = accept(parent_sock, address,addresslen);  
     pid_t returnValue = fork();
     if(returnValue == 0){
         read_in::handleClient();
@@ -43,12 +45,22 @@ class read_in{
     std::ifstream file; //File being passed in
     char* filename; //file name
     uintmax_t size = file.tellg();
-    int socketIn, newSocket;
+    u_int32_t socketIn, newSocket;
     char buffer[1024];
 //Decoding QR Code using Ssystem(part 2)
 void handleClient(){
+    u_int32_t length;
 socketIn = socket(PF_INET, SOCK_STREAM,0);
-    recv(socketIn, buffer, 4, 0);
+    recv(socketIn, &length, 4, 0);
+    
+    u_int32_t bytesRecievedSoFar = 0;
+    u_int32_t bytesActuallyRecieved;
+    while (bytesRecievedSoFar < length){
+    bytesActuallyRecieved = recv(socketIn, (buffer+bytesRecievedSoFar/(sizeof(u_int32_t))), length-bytesRecievedSoFar, 0);
+    bytesRecievedSoFar += bytesActuallyRecieved;
+    }
+
+
     //char* URL = qrDecode
 //read_in::read()
     
