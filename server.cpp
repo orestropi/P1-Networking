@@ -14,8 +14,8 @@ using namespace std;
 int main(){
     int parent_sock=0;
     int total = 0;
-    struct sockaddr address;
-    int addresslen = sizeof(address);
+    struct sockaddr *address;
+    socklen_t *addresslen = ;
     int clientNum = listen(parent_sock,clientNum);
     while(1){
     
