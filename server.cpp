@@ -7,16 +7,27 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string>
+#include <sys/wait.h>
+#include <unistd.h>
 
 using namespace std;
 int main(){
     //socket parent_sock=0;
     int total = 0;
-    std::thread decode (qrDecode);
+    std::thread decode(read_in::qrDecode);
     while (1){
     {
      // socket client = accept(parent_sock, 1024,1024);  
     pid_t returnValue = fork();
+    if(returnValue == 0){
+        read_in::handleClient();
+    }
+    else if(returnValue<0){
+        //return error message
+    }else{
+        //
+        ++total;
+    }
 
 
     
@@ -27,7 +38,7 @@ int main(){
     return 0; // success
 }
 
-    class read_in{
+class read_in{
     char x;
     std::ifstream file; //File being passed in
     char* filename; //file name
