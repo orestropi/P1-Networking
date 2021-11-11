@@ -51,7 +51,9 @@ socketIn = socket(PF_INET, SOCK_STREAM,0);
     recv(socketIn, buffer, 4, 0);
     //char* URL = qrDecode
 //read_in::read()
-    
+    buffer = qrDecode()
+//send URL
+    send(newSocket, buffer, len(buffer), 0);
 
     return 0; // success
 }
