@@ -9,7 +9,7 @@
 #include <stdio.h>
 #include <string>
 
-int main(){
+int main(int argc, char const *argv[]){
     int clientSocket;
     char buffer[1024];
     // need a variable for the server address
@@ -28,3 +28,4 @@ int main(){
     return 0; //success
 
 }
+

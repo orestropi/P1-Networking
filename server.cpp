@@ -12,7 +12,7 @@
 
 
 using namespace std;
-int main(){
+int main(int argc, char const *argv[]){
     int parent_sock=0;
     int total = 0;
     struct sockaddr *address;
@@ -65,9 +65,10 @@ socketIn = socket(PF_INET, SOCK_STREAM,0);
 
     char* URL = qrDecode();
 //read_in::read()
-    buffer = qrDecode()
+   // buffer = qrDecode()
 //send URL
-    send(newSocket, buffer, len(buffer), 0);
+   // newSocket = socket()
+    send(newSocket, URL,URL.length(), 0);
 
     return 0; // success
 }
