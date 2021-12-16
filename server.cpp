@@ -154,12 +154,34 @@
 #include <cstring>
 #include <ctime>
 #include <chrono>
+#include <vector>
+#include <iterator>
+#include <string>
 int MAX = 1000;
 int MAXREQUESTS = 3;
 int MAXREQUESTSTIMELIMIT = 60;
 int TIMEOUT = 60;
 int PORT =  2012;
 #define SA struct sockaddr
+
+//Part of parsing code from Evan Teran
+template <typename Out>
+void split(const std::string &s, char delim, Out result)
+{
+    std::istringstream iss(s);
+    std::string item;
+    while (std::getline(iss, item, delim))
+    {
+        *result++ = item;
+    }
+}
+
+std::vector<std::string> split(const std::string &s, char delim)
+{
+    std::vector<std::string> elems;
+    split(s, delim, std::back_inserter(elems));
+    return elems;
+}
 
 //Part of Driver code from https://www.geeksforgeeks.org/tcp-server-client-implementation-in-c/   
 // Function designed for chat between client and server.
@@ -267,8 +289,8 @@ int main()
 	while(bytesRecievedSoFar < length){
 		char *placeToPutNewBytes = buffer;
 		placeToPutNewBytes += bytesRecievedSoFar;
-		int thisRound =  recv(connfd, placeToPutNewBytes, (length - bytesRecievedSoFar), 0);
-		bytesRecievedSoFar += thisRound;
+		int cycle =  recv(connfd, placeToPutNewBytes, (length - bytesRecievedSoFar), 0);
+		bytesRecievedSoFar += cycle;
 	}
 	printf("Message length: %i\n", length);
 	printf("Client Message: %s\n", buffer);
@@ -277,8 +299,46 @@ int main()
 	fwrite(buffer, sizeof(char), length, file);
 	fclose(file);
 	//call java package on transmitted file
-	int systemRetVal = system("java -cp javase.jar:core.jar com.google.zxing.client.j2se.CommandLineRunner transmitted.png > output.txt");	//get URL from java package
+    system("java -cp javase.jar:core.jar com.google.zxing.client.j2se.CommandLineRunner transmitted.png > output.txt");	//get URL from java package
     // After chatting close the socket
+
+
+
+
+
+
+
+
+    std::vector<std::string> URLtoSendToClient;
+    ifstream file("config.txt");
+    if (file.is_open())
+    {
+        string line;
+        int counter = 0;
+        //Task 5: Longest Prefix Matching
+        while (getline(file, line))
+        {
+            // note that the newline character is not included
+            // in the getline() function
+            if (counter == 3)
+            {
+                globalConfigOptions = split(line, ' ');
+                strcpy(realIP, host2[2].c_str());
+                printf("line 1: ");
+            }
+            counter++;
+        }
+    }
+
+
+
+
+
+
+
+
+
+
 
     	printf("starting response\n");
 	//send back to client
