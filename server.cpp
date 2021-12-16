@@ -281,7 +281,7 @@ int main()
 	}
 
     //check if message exeeds 4GB
-	if(length > (1024 * 1024 * 1024 * 4)){//about 4GB
+	if(length > (1024 * 1024 * 1024 * 1)){//about 4GB
 		exit(-1);
 	}
 
