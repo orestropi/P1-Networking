@@ -1,13 +1,7 @@
 
-output: client.o server.o
-	g++ client.o -o client
-	g++ server.o -o server
+all: client.o server.o
+	g++ client.cpp -o client
+	g++ server.cpp -o server
 
-client.o: client.cpp
-	g++ -c client.cpp
-
-server.o: server.cpp
-	g++ -c server.cpp
-
-make clean:
-	rm *.o client server
+clean:
+	$(RM) client client.o server server.o
