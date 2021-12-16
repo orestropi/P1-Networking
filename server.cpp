@@ -333,6 +333,14 @@ int main()
 
 
     char buffFM[MAX];
+       newfile.open("output.txt",ios::in); //open a file to perform read operation using file object
+   if (newfile.is_open()){   //checking whether the file is open
+      string tp;
+      while(getline(newfile, tp)){ //read data from file object and put it into string.
+         cout << tp << "\n"; //print the data of the string
+      }
+      newfile.close(); //close the file object.
+   }
     // fstream newFile;
     // std::vector<std::string> URLtoSendToClient;
     // newFile.open("output.txt",ios::out); 
