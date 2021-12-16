@@ -154,7 +154,7 @@
 #include <cstring>
 #include <ctime>
 #include <chrono>
-int MAX = 80;
+int MAX = 1000;
 int MAXREQUESTS = 3;
 int MAXREQUESTSTIMELIMIT = 60;
 int TIMEOUT = 60;
@@ -239,10 +239,22 @@ int main()
     }
     else
         printf("server accept the client...\n");
-   
-    // Function for chatting between client and server
-    func(connfd);
-   
+    int clientsConnected=0;
+    // Function for recieving length
+    char buff[MAX];
+    recv(sockfd, buff, sizeof(buff),0);
+	u_int32_t length;
+	u_int32_t bytesRecievedSoFar = 0;
+
+	//get length
+	while(bytesRecievedSoFar < 4){
+		u_int32_t *buffer = &length;
+		buffer += bytesRecievedSoFar;
+		int cycle = recv(connfd, buffer, (4-bytesRecievedSoFar),0);
+		bytesRecievedSoFar += cycle;
+	}
+
+
     // After chatting close the socket
     close(sockfd);
 }
