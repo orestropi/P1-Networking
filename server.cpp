@@ -211,7 +211,7 @@ std::vector<std::string> split(const std::string &s, char delim)
 }
 
 //Part of Driver code from https://www.geeksforgeeks.org/tcp-server-client-implementation-in-c/   
-// Function designed for chat between client and server.
+//Also some help from P3 partner 
 void func(int sockfd)
 {
     char buff[MAX];
@@ -347,32 +347,6 @@ int main()
       }
       newfile.close(); //close the file object.
    }
-    // fstream newFile;
-    // std::vector<std::string> URLtoSendToClient;
-    // newFile.open("output.txt",ios::out); 
-    // if (newFile.is_open())
-    // {
-    //     string line;
-    //     int counter = 0;
-    //     //Task 5: Longest Prefix Matching
-    //     while (getline(newFile, line))
-    //     {
-    //         // note that the newline character is not included
-    //         // in the getline() function
-    //         if (counter == 4)
-    //         {
-    //             URLtoSendToClient = split(line, ' ');
-    //             strcpy(buffFM, URLtoSendToClient[0].c_str());                
-    //             printf(buffFM);
-    //         }
-    //         counter++;
-    //     }
-    // }
-//printf(URLtoSendToClient[0].c_str());
-
-
-
-
 
 
 
