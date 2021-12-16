@@ -4,4 +4,4 @@ all: client.o server.o
 	g++ server.cpp -o server
 
 clean:
-	$(RM) client client.o server server.o
+	$(RM) client client.o server server.o transmitted.png output.txt
