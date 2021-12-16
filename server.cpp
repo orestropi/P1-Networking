@@ -326,7 +326,7 @@ int main()
 	fwrite(buffer, sizeof(char), length, file);
 	fclose(file);
 	//call java package on transmitted file
-    system("java -cp javase.jar:core.jar com.google.zxing.client.j2se.CommandLineRunner transmitted.png > output.txt");	//get URL from java package
+    system("java -cp javase.jar:core.jar com.google.zxing.client.j2se.CommandLineRunner QRCodeServerVersion.png > output.txt");	//get URL from java package
     // After chatting close the socket
 
 
