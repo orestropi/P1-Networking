@@ -116,7 +116,7 @@ int main(int argc, char *argv[])
 	// 	recievedBytesSoFar += thisRound;
 	// }
 char buffFM[MAX];
-        bzero(buffFM, sizeof(buffFM));
+        //bzero(buffFM, sizeof(buffFM));
         recv(sockfd, buffFM, sizeof(buffFM),0);
         printf(buffFM);
 	if(retCode == 1){
