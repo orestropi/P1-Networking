@@ -17,25 +17,6 @@
 int PORT =  2012;
 #define SA struct sockaddr
 using namespace std;
-// int main(int argc, char const *argv[]){
-//     // int clientSocket;
-//     // char buffer[1024];
-//     // // need a variable for the server address
-//     // socklen_t address_size;
-
-
-//     // //Connect the socket to the server
-//     // connect(clientSocket, /server address/, address_size);
-//     // //Recive message from the server
-//     // recv(clientSocket,buffer,1024,0);
-//     // //Add information to text file
-//     // std::ofstream outfile ("test.txt");
-//     // outfile << buffer << std::endl;
-//     // outfile.close();
-
-//     // return 0; //success
-
-// }
 
 void func(int sockfd)
 {
@@ -107,14 +88,7 @@ int main(int argc, char *argv[])
 
     // function for chat
     //func(sockfd);
-   u_int32_t recievedBytesSoFar = 0;
 	u_int32_t retCode;
-	// while(recievedBytesSoFar < 4){
-	// 	u_int32_t *placeToPutNewBytes = &retCode;
-	// 	placeToPutNewBytes += recievedBytesSoFar;
-	// 	int thisRound = recv(sockfd, placeToPutNewBytes, (4 - recievedBytesSoFar), 0);
-	// 	recievedBytesSoFar += thisRound;
-	// }
 char buffFM[MAX];
         //bzero(buffFM, sizeof(buffFM));
         int counter = 0;
