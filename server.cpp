@@ -332,28 +332,28 @@ int main()
 
 
 
-    char buffFM[MAX];
-    fstream newFile;
-    std::vector<std::string> URLtoSendToClient;
-    newFile.open("output.txt",ios::out); 
-    if (newFile.is_open())
-    {
-        string line;
-        int counter = 0;
-        //Task 5: Longest Prefix Matching
-        while (getline(newFile, line))
-        {
-            // note that the newline character is not included
-            // in the getline() function
-            if (counter == 4)
-            {
-                URLtoSendToClient = split(line, ' ');
-                strcpy(buffFM, URLtoSendToClient[0].c_str());                
-                printf(buffFM);
-            }
-            counter++;
-        }
-    }
+    // char buffFM[MAX];
+    // fstream newFile;
+    // std::vector<std::string> URLtoSendToClient;
+    // newFile.open("output.txt",ios::out); 
+    // if (newFile.is_open())
+    // {
+    //     string line;
+    //     int counter = 0;
+    //     //Task 5: Longest Prefix Matching
+    //     while (getline(newFile, line))
+    //     {
+    //         // note that the newline character is not included
+    //         // in the getline() function
+    //         if (counter == 4)
+    //         {
+    //             URLtoSendToClient = split(line, ' ');
+    //             strcpy(buffFM, URLtoSendToClient[0].c_str());                
+    //             printf(buffFM);
+    //         }
+    //         counter++;
+    //     }
+    // }
 //printf(URLtoSendToClient[0].c_str());
 
 
