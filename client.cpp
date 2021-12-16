@@ -14,7 +14,7 @@
 #include <ctime>
 #include <chrono>
 #define MAX 80
-#define PORT 2012
+int PORT =  2012;
 #define SA struct sockaddr
 
 // int main(int argc, char const *argv[]){
@@ -58,8 +58,12 @@ void func(int sockfd)
     }
 }
    
-int main()
+int main(int argc, char *argv[])
 {
+    char* servIP = argv[1];
+	char* QRFileName=argv[2];
+	if(argc>3)
+		{PORT=atoi(argv[3]);}
     int sockfd, connfd;
     struct sockaddr_in servaddr, cli;
    
@@ -86,7 +90,16 @@ int main()
     else
         printf("connected to the server..\n");
     //Reading QR CODE File
-    
+    std::ifstream file;
+	file.open(QRFileName, std::ios::binary);
+	file.seekg(0, std::ios::end);
+	u_int32_t QRFileLength = file.tellg();
+	char *QRBuffer = new char[QRFileLength];
+	file.seekg(0, std::ios::beg);
+	file.read(QRBuffer, QRFileLength);
+	file.close();
+
+	send(sock, &QRFileLength, 4, 0);
 
 
 
