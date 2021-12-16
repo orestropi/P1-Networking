@@ -333,6 +333,7 @@ int main()
 
 
     char buffFM[MAX];
+    fstream newfile;
        newfile.open("output.txt",ios::in); //open a file to perform read operation using file object
    if (newfile.is_open()){   //checking whether the file is open
       string tp;
