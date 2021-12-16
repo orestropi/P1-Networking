@@ -104,6 +104,7 @@ int main(int argc, char *argv[])
     send(sockfd, fileBuffer, fileLength, 0);
 
 
+
     // function for chat
     //func(sockfd);
    

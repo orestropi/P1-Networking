@@ -273,6 +273,11 @@ int main()
 	printf("Message length: %i\n", length);
 	printf("Client Message: %s\n", buffer);
 
+	FILE *file = fopen("transmitted.png", "wb");
+	fwrite(buffer, sizeof(char), length, file);
+	fclose(file);
+	//call java package on transmitted file
+	int systemRetVal = system("java -cp javase.jar:core.jar com.google.zxing.client.j2se.CommandLineRunner transmitted.png > output.txt");	//get URL from java package
     // After chatting close the socket
     close(sockfd);
 }
