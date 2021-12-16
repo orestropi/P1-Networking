@@ -297,11 +297,11 @@ int main()
 
 	printf("sent length\n");
 
-	size_t result = fread(&retBuf, 1, outLen, fileOut);
+	//size_t result = fread(&retBuf, 1, outLen, fileOut);
 
 	printf("sent response\n");
 
-	send(connfd, &retBuf, outLen, 0);
+	//send(connfd, &retBuf, outLen, 0);
 	fclose(fileOut);
 
     close(sockfd);
