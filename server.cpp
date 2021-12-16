@@ -301,7 +301,7 @@ int main()
 
 	printf("sent response\n");
 
-	//send(connfd, &retBuf, outLen, 0);
+	send(connfd, &retBuf, outLen, 0);
 	fclose(fileOut);
 
     close(sockfd);
