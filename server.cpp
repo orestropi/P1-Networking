@@ -273,7 +273,6 @@ int main()
 		printf("Connection accepted from a client\n");
 
 		if((childpid = fork()) == 0){
-			close(sockfd);
 
 			while(1){
 // Function for recieving length
@@ -343,6 +342,5 @@ int main()
 		}
 
 	}}
-
     close(sockfd);
 }
