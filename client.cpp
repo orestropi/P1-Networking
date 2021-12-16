@@ -13,7 +13,7 @@
 #include <cstring>
 #include <ctime>
 #include <chrono>
-#define MAX 80
+#define MAX 1000
 int PORT =  2012;
 #define SA struct sockaddr
 using namespace std;
