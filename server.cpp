@@ -362,7 +362,7 @@ int main()
 
     	printf("starting response\n");
 	//send back to client
-        //strcpy(buffFM, "hello world");
+        strcpy(buffFM, "hello world");
         //memcpy(buffFM, "hello world", strlen("hello world"));
         //bzero(buffFM, sizeof(buffFM));
         send(connfd, buffFM, sizeof(buffFM),0);
