@@ -16,8 +16,6 @@
 #include <iterator>
 #include <string>
 
-
-
 #include <iostream>
 #include <filesystem>
 #include <stdio.h>
@@ -46,7 +44,7 @@ int MAX = 1000;
 int MAXREQUESTS = 3;
 int MAXREQUESTSTIMELIMIT = 60;
 int TIMEOUT = 60;
-int PORT =  2012;
+int PORT = 2012;
 #define SA struct sockaddr
 
 //Part of parsing code from Evan Teran
@@ -68,132 +66,147 @@ std::vector<std::string> split(const std::string &s, char delim)
     return elems;
 }
 
-//Part of Driver code from https://www.geeksforgeeks.org/tcp-server-client-implementation-in-c/   
-//Also some help from P3 partner Robert Eskridge 
+//Part of Driver code from https://www.geeksforgeeks.org/tcp-server-client-implementation-in-c/
+//Also some help from P3 partner Robert Eskridge
 //Bunch of server code came from lecture too
 // Main server code
 int main()
 {
     int sockfd, connfd, len;
     struct sockaddr_in servaddr, cli;
-   
+
     // socket create and verification
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
-    if (sockfd == -1) {
+    if (sockfd == -1)
+    {
         printf("socket creation failed...\n");
         exit(0);
     }
     else
         printf("Socket successfully created..\n");
     bzero(&servaddr, sizeof(servaddr));
-   
+
     // assign IP, PORT
     servaddr.sin_family = AF_INET;
     servaddr.sin_addr.s_addr = htonl(INADDR_ANY);
     servaddr.sin_port = htons(PORT);
-   
+
     // Binding newly created socket to given IP and verification
-    if ((bind(sockfd, (SA*)&servaddr, sizeof(servaddr))) != 0) {
+    if ((bind(sockfd, (SA *)&servaddr, sizeof(servaddr))) != 0)
+    {
         printf("socket bind failed...\n");
         exit(0);
     }
     else
         printf("Socket successfully binded..\n");
-   
+
     // Now server is ready to listen and verification
-    if ((listen(sockfd, 5)) != 0) {
+    if ((listen(sockfd, 5)) != 0)
+    {
         printf("Listen failed...\n");
         exit(0);
     }
     else
         printf("Server listening..\n");
     len = sizeof(cli);
-    int clientsConnected=0;
-    int totalClientsConnected=0;     
+    int clientsConnected = 0;
+    int totalClientsConnected = 0;
 
-while(1){
-connfd = accept(sockfd, (SA*)&cli, (socklen_t *)&len);
-    if (connfd < 0) {
-        printf("server accept failed...\n");
-        exit(0);
-    }
-    else
-        {printf("server accept the client...\n");}
-pid_t pid = fork();
-		clientsConnected++;
-		if(pid == 0){
-			//child
-			close(sockfd);
-			// Function for recieving length
-    char buff[MAX];
-    recv(sockfd, buff, sizeof(buff),0);
-	u_int32_t length;
-	u_int32_t bytesRecievedSoFar = 0;
-	printf("Message length: %i\n", length);
-
-	//get length
-	while(bytesRecievedSoFar < 4){
-		u_int32_t *buffer = &length;
-		buffer += bytesRecievedSoFar;
-		int cycle = recv(connfd, buffer, (4-bytesRecievedSoFar),0);
-		bytesRecievedSoFar += cycle;
-	}
-
-    //check if message exeeds 4GB
-	if(length > (1024 * 1024 * 1024 * 1)){//about 4GB
-		exit(-1);
-	}
-
-	//read message from client
-	char *buffer = (char*)malloc(length);
-
-	bytesRecievedSoFar = 0;
-	while(bytesRecievedSoFar < length){
-		char *store = buffer;
-		store += bytesRecievedSoFar;
-		int cycle =  recv(connfd, store, (length - bytesRecievedSoFar), 0);
-		bytesRecievedSoFar += cycle;
-	}
-
-
-	FILE *file = fopen("QRCodeServerVersion.png", "wb");
-	fwrite(buffer, sizeof(char), length, file);
-	fclose(file);
-	//use java program
-    system("java -cp javase.jar:core.jar com.google.zxing.client.j2se.CommandLineRunner QRCodeServerVersion.png > output.txt");	//get URL from java package
-
-    int counter = 0;
-    char buffFM[MAX];
-    fstream outCheck;
-       outCheck.open("output.txt",ios::in);
-   if (outCheck.is_open()){ 
-      string currentLine;
-      while(getline(outCheck, currentLine)){
-         counter++;
-         if(counter==3){strcpy(buffFM, currentLine.c_str());
-        //cout << buffFM << "heyooooo\n";
-}
-         //cout << currentLine << "\n";
-         
-      }
-      outCheck.close(); 
-   }
-
-
-
-    	printf("starting response\n");
-	//send back to client
-        send(connfd, buffFM, sizeof(buffFM),0);
-        printf(buffFM);
-        printf("size of buf %d\n",sizeof(buffFM));
-			exit(0);
-		}else if(pid < 0){
-			printf("O.o");
-		}else{
-			//parent
-			close(connfd);
-			totalClientsConnected++;
-		}
-        //wait
+    while (1)
+    {
+        connfd = accept(sockfd, (SA *)&cli, (socklen_t *)&len);
+        if (connfd < 0)
+        {
+            printf("server accept failed...\n");
+            exit(0);
         }
+        else
+        {
+            printf("server accept the client...\n");
+        }
+        pid_t pid = fork();
+        clientsConnected++;
+        if (pid == 0)
+        {
+            //child
+            close(sockfd);
+            // Function for recieving length
+            char buff[MAX];
+            recv(sockfd, buff, sizeof(buff), 0);
+            u_int32_t length;
+            u_int32_t bytesRecievedSoFar = 0;
+            printf("Message length: %i\n", length);
+
+            //get length
+            while (bytesRecievedSoFar < 4)
+            {
+                u_int32_t *buffer = &length;
+                buffer += bytesRecievedSoFar;
+                int cycle = recv(connfd, buffer, (4 - bytesRecievedSoFar), 0);
+                bytesRecievedSoFar += cycle;
+            }
+
+            //check if message exeeds 4GB
+            if (length > (1024 * 1024 * 1024 * 1))
+            { //about 4GB
+                exit(-1);
+            }
+
+            //read message from client
+            char *buffer = (char *)malloc(length);
+
+            bytesRecievedSoFar = 0;
+            while (bytesRecievedSoFar < length)
+            {
+                char *store = buffer;
+                store += bytesRecievedSoFar;
+                int cycle = recv(connfd, store, (length - bytesRecievedSoFar), 0);
+                bytesRecievedSoFar += cycle;
+            }
+
+            FILE *file = fopen("QRCodeServerVersion.png", "wb");
+            fwrite(buffer, sizeof(char), length, file);
+            fclose(file);
+            //use java program
+            system("java -cp javase.jar:core.jar com.google.zxing.client.j2se.CommandLineRunner QRCodeServerVersion.png > output.txt"); //get URL from java package
+
+            int counter = 0;
+            char buffFM[MAX];
+            fstream outCheck;
+            outCheck.open("output.txt", ios::in);
+            if (outCheck.is_open())
+            {
+                string currentLine;
+                while (getline(outCheck, currentLine))
+                {
+                    counter++;
+                    if (counter == 3)
+                    {
+                        strcpy(buffFM, currentLine.c_str());
+                        //cout << buffFM << "heyooooo\n";
+                    }
+                    //cout << currentLine << "\n";
+                }
+                outCheck.close();
+            }
+
+            printf("starting response\n");
+            //send back to client
+            send(connfd, buffFM, sizeof(buffFM), 0);
+            printf(buffFM);
+            printf("size of buf %d\n", sizeof(buffFM));
+            exit(0);
+        }
+        else if (pid < 0)
+        {
+            printf("O.o");
+        }
+        else
+        {
+            //parent
+            close(connfd);
+            totalClientsConnected++;
+        }
+        //wait
+    }
 }
