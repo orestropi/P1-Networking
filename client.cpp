@@ -98,7 +98,7 @@ char buffFM[MAX];
         }
 	if(retCode == 1){
 		return 0;
-	}else{          printf("This is the URL Recieved from the server: %s", buffFM);
+	}else{printf("\nThis is the URL Recieved from the server: %s\n", buffFM);
 }
 
 		
