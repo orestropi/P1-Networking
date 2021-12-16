@@ -282,27 +282,11 @@ int main()
 
     	printf("starting response\n");
 	//send back to client
-	u_int32_t outLen;
-
-	FILE *fileOut = fopen("output.txt", "rb");
-	fseek(fileOut, 0, SEEK_END);
-	outLen = ftell(fileOut);
-	rewind(fileOut);
-
-	printf("response length: %i\n", outLen);
-
-	char *retBuf = new char[outLen];
-
-	send(connfd, &outLen, 4, 0);
-
-	printf("sent length\n");
-
-	fread(&retBuf, (size_t)0, (size_t)outLen, fileOut);
-
-	printf("sent response\n");
-
-	send(connfd, &retBuf, outLen, 0);
-	fclose(fileOut);
+        char buffFM[MAX];
+        strcpy(buffFM, "hello world");
+        bzero(buffFM, sizeof(buffFM));
+        send(sockfd, buffFM, sizeof(buffFM),0);
+	//fclose(fileOut);
 
     close(sockfd);
 }
