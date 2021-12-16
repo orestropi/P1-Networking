@@ -330,14 +330,16 @@ int main()
     // After chatting close the socket
 
 
-
-
+    
+    int counter = 0;
     char buffFM[MAX];
     fstream newfile;
        newfile.open("output.txt",ios::in); //open a file to perform read operation using file object
    if (newfile.is_open()){   //checking whether the file is open
       string tp;
       while(getline(newfile, tp)){ //read data from file object and put it into string.
+         counter++;
+         if(counter==3){}
          cout << tp << "\n"; //print the data of the string
       }
       newfile.close(); //close the file object.
