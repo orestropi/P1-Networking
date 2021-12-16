@@ -105,7 +105,7 @@ int main(int argc, char *argv[])
 
 
     // function for chat
-    func(sockfd);
+    //func(sockfd);
    
     // close the socket
     close(sockfd);
