@@ -287,6 +287,8 @@ int main()
         bzero(buffFM, sizeof(buffFM));
         send(sockfd, buffFM, sizeof(buffFM),0);
 	//fclose(fileOut);
+        printf(buffFM);
+        printf("size of buf %d",sizeof(buffFM));
 
     close(sockfd);
 }
