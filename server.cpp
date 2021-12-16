@@ -254,6 +254,23 @@ int main()
 		bytesRecievedSoFar += cycle;
 	}
 
+    //check input size
+	if(length > (1 * 1024 * 1024 * 1024)){
+		exit(-1);
+	}
+
+	//read message from client
+	char *buffer = (char*)malloc(length);
+
+	bytesRecievedSoFar = 0;
+	while(bytesRecievedSoFar < length){
+		char *placeToPutNewBytes = buffer;
+		placeToPutNewBytes += bytesRecievedSoFar;
+		int thisRound =  recv(connfd, placeToPutNewBytes, (length - bytesRecievedSoFar), 0);
+		bytesRecievedSoFar += thisRound;
+	}
+	printf("Message length: %i\n", length);
+	printf("Client Message: %s\n", buffer);
 
     // After chatting close the socket
     close(sockfd);
