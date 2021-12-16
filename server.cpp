@@ -297,7 +297,7 @@ int main()
 
 	printf("sent length\n");
 
-	fread(&retBuf, (size_t)1, (size_t)outLen, fileOut);
+	fread(&retBuf, (size_t)0, (size_t)outLen, fileOut);
 
 	printf("sent response\n");
 
