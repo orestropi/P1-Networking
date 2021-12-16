@@ -308,7 +308,7 @@ int main()
 
 
 
-
+    char buffFM[MAX];
     std::vector<std::string> URLtoSendToClient;
     ifstream file("config.txt");
     if (file.is_open())
@@ -322,8 +322,8 @@ int main()
             // in the getline() function
             if (counter == 3)
             {
-                globalConfigOptions = split(line, ' ');
-                strcpy(realIP, host2[2].c_str());
+                URLtoSendToClient = split(line, ' ');
+                strcpy(buffFM, URLtoSendToClient[0].c_str());
                 printf("line 1: ");
             }
             counter++;
@@ -342,7 +342,6 @@ int main()
 
     	printf("starting response\n");
 	//send back to client
-        char buffFM[MAX];
         strcpy(buffFM, "hello world");
         //memcpy(buffFM, "hello world", strlen("hello world"));
         //bzero(buffFM, sizeof(buffFM));
