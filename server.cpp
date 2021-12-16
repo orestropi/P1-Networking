@@ -157,6 +157,33 @@
 #include <vector>
 #include <iterator>
 #include <string>
+
+
+
+#include <iostream>
+#include <filesystem>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <arpa/inet.h>
+#include <netinet/in.h>
+#include <netinet/ip.h>
+#include <netinet/udp.h>
+#include <fstream>
+#include <string>
+#include <sstream>
+#include <vector>
+#include <iterator>
+#include <chrono>
+#include <thread>
+
+#include <sys/stat.h>
+
+using namespace std;
+
 int MAX = 1000;
 int MAXREQUESTS = 3;
 int MAXREQUESTSTIMELIMIT = 60;
@@ -310,7 +337,7 @@ int main()
 
     char buffFM[MAX];
     std::vector<std::string> URLtoSendToClient;
-    ifstream file("config.txt");
+    ifstream file("output.txt");
     if (file.is_open())
     {
         string line;
