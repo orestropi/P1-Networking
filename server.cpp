@@ -284,49 +284,41 @@ int main()
 
 	bytesRecievedSoFar = 0;
 	while(bytesRecievedSoFar < length){
-		char *placeToPutNewBytes = buffer;
-		placeToPutNewBytes += bytesRecievedSoFar;
-		int cycle =  recv(connfd, placeToPutNewBytes, (length - bytesRecievedSoFar), 0);
+		char *store = buffer;
+		store += bytesRecievedSoFar;
+		int cycle =  recv(connfd, store, (length - bytesRecievedSoFar), 0);
 		bytesRecievedSoFar += cycle;
 	}
-	printf("Message length: %i\n", length);
-	printf("Client Message: %s\n", buffer);
+
 
 	FILE *file = fopen("QRCodeServerVersion.png", "wb");
 	fwrite(buffer, sizeof(char), length, file);
 	fclose(file);
-	//call java package on transmitted file
+	//use java program
     system("java -cp javase.jar:core.jar com.google.zxing.client.j2se.CommandLineRunner QRCodeServerVersion.png > output.txt");	//get URL from java package
-    // After chatting close the socket
 
-
-    
     int counter = 0;
     char buffFM[MAX];
-    fstream newfile;
-       newfile.open("output.txt",ios::in); //open a file to perform read operation using file object
-   if (newfile.is_open()){   //checking whether the file is open
-      string tp;
-      while(getline(newfile, tp)){ //read data from file object and put it into string.
+    fstream outCheck;
+       outCheck.open("output.txt",ios::in);
+   if (outCheck.is_open()){ 
+      string currentLine;
+      while(getline(outCheck, currentLine)){
          counter++;
-         if(counter==3){strcpy(buffFM, tp.c_str());
-                  cout << buffFM << "heyooooo\n"; //print the data of the string
+         if(counter==3){strcpy(buffFM, currentLine.c_str());
+        //cout << buffFM << "heyooooo\n";
 }
-         cout << tp << "\n"; //print the data of the string
+         //cout << currentLine << "\n";
          
       }
-      newfile.close(); //close the file object.
+      outCheck.close(); 
    }
 
 
 
     	printf("starting response\n");
 	//send back to client
-        //strcpy(buffFM, "hello world");
-        //memcpy(buffFM, "hello world", strlen("hello world"));
-        //bzero(buffFM, sizeof(buffFM));
         send(connfd, buffFM, sizeof(buffFM),0);
-	//fclose(fileOut);
         printf(buffFM);
         printf("size of buf %d\n",sizeof(buffFM));
 
