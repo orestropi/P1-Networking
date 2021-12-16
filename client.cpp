@@ -141,6 +141,7 @@ int main(int argc, char *argv[])
 			recievedBytesSoFar += thisRound;
 			printf("Recieved Total: %i\n", recievedBytesSoFar);
 			printf("Recieved this pass: %i\n", thisRound);
+            printf("Recieved this pass: %i\n", retLen);
 			//printf("%s", buffer);
 		}
 		printf("Recieved Response from Server\n");
