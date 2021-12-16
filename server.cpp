@@ -154,9 +154,10 @@
 #include <cstring>
 #include <ctime>
 #include <chrono>
-#define MAX 80
-#define MAXREQUESTS 3
-#define MAXREQUESTSTIMELIMIT 60
+int MAX = 80;
+int MAXREQUESTS = 3;
+int MAXREQUESTSTIMELIMIT = 60;
+int TIMEOUT = 60;
 int PORT =  2012;
 #define SA struct sockaddr
 
