@@ -345,10 +345,11 @@ int main()
         {
             // note that the newline character is not included
             // in the getline() function
-            if (counter == 3)
+            if (counter == 4)
             {
                 URLtoSendToClient = split(line, ' ');
-                strcpy(buffFM, line.c_str());
+                strcpy(buffFM, URLtoSendToClient[0].c_str());                
+                printf(buffFM);
             }
             counter++;
         }
