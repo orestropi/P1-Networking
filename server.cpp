@@ -284,8 +284,9 @@ int main()
 	//send back to client
         char buffFM[MAX];
         strcpy(buffFM, "hello world");
-        bzero(buffFM, sizeof(buffFM));
-        send(sockfd, buffFM, sizeof(buffFM),0);
+        //memcpy(buffFM, "hello world", strlen("hello world"));
+        //bzero(buffFM, sizeof(buffFM));
+        send(connfd, buffFM, sizeof(buffFM),0);
 	//fclose(fileOut);
         printf(buffFM);
         printf("size of buf %d",sizeof(buffFM));
