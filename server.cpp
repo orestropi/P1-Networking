@@ -155,7 +155,9 @@
 #include <ctime>
 #include <chrono>
 #define MAX 80
-#define PORT 8080
+#define MAXREQUESTS 3
+#define MAXREQUESTSTIMELIMIT 60
+int PORT =  2012;
 #define SA struct sockaddr
    
 // Function designed for chat between client and server.
@@ -163,6 +165,7 @@ void func(int sockfd)
 {
     char buff[MAX];
     int n;
+
     // infinite loop for chat
     for (;;) {
         bzero(buff, MAX);

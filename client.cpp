@@ -14,7 +14,7 @@
 #include <ctime>
 #include <chrono>
 #define MAX 80
-#define PORT 8080
+#define PORT 2012
 #define SA struct sockaddr
 
 // int main(int argc, char const *argv[]){
