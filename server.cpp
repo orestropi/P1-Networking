@@ -279,5 +279,30 @@ int main()
 	//call java package on transmitted file
 	int systemRetVal = system("java -cp javase.jar:core.jar com.google.zxing.client.j2se.CommandLineRunner transmitted.png > output.txt");	//get URL from java package
     // After chatting close the socket
+
+    	printf("starting response\n");
+	//send back to client
+	u_int32_t outLen;
+
+	FILE *fileOut = fopen("output.txt", "rb");
+	fseek(fileOut, 0, SEEK_END);
+	outLen = ftell(fileOut);
+	rewind(fileOut);
+
+	printf("response length: %i\n", outLen);
+
+	char *retBuf = new char[outLen];
+
+	send(connfd, &outLen, 4, 0);
+
+	printf("sent length\n");
+
+	size_t result = fread(&retBuf, 1, outLen, fileOut);
+
+	printf("sent response\n");
+
+	send(connfd, &retBuf, outLen, 0);
+	fclose(fileOut);
+
     close(sockfd);
 }

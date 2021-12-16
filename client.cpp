@@ -107,7 +107,50 @@ int main(int argc, char *argv[])
 
     // function for chat
     //func(sockfd);
-   
+   u_int32_t recievedBytesSoFar = 0;
+	u_int32_t retCode;
+	while(recievedBytesSoFar < 4){
+		u_int32_t *placeToPutNewBytes = &retCode;
+		placeToPutNewBytes += recievedBytesSoFar;
+		int thisRound = recv(sockfd, placeToPutNewBytes, (4 - recievedBytesSoFar), 0);
+		recievedBytesSoFar += thisRound;
+	}
+
+	if(retCode == 1){
+		return 0;
+	}else{
+
+		recievedBytesSoFar = 0;
+		u_int32_t retLen;
+
+		while(recievedBytesSoFar < 4){
+			u_int32_t *placeToPutNewBytes = &retLen;
+			placeToPutNewBytes += recievedBytesSoFar;
+			int thisRound = recv(sockfd, placeToPutNewBytes, (4 - recievedBytesSoFar), 0);
+			recievedBytesSoFar += thisRound;
+		}
+		printf("recieved length%i\n", retLen);
+		recievedBytesSoFar = 0;
+		char *buffer = new char[retLen];
+
+		//recieve URL from server
+		while(recievedBytesSoFar < retLen){
+			char *placeToPutNewBytes = buffer;
+			placeToPutNewBytes += recievedBytesSoFar;
+			int thisRound = recv(sockfd, placeToPutNewBytes, (retLen - recievedBytesSoFar), 0);
+			recievedBytesSoFar += thisRound;
+			printf("Recieved Total: %i\n", recievedBytesSoFar);
+			printf("Recieved this pass: %i\n", thisRound);
+			//printf("%s", buffer);
+		}
+		printf("Recieved Response from Server\n");
+		for(int i = 0; i < retLen; i++){
+			printf("%c", buffer[i]);
+		}
+		fflush(stdout);
+		close(sockfd);
+		exit(0);
+	}
     // close the socket
     close(sockfd);
 }
