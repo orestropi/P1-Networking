@@ -85,7 +85,12 @@ int main()
     }
     else
         printf("connected to the server..\n");
-   
+    //Reading QR CODE File
+    
+
+
+
+
     // function for chat
     func(sockfd);
    
