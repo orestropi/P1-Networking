@@ -263,6 +263,26 @@ int main()
     char buffForAllClients[MAX];
     	pid_t childpid;
 
+	while(1){
+    connfd = accept(sockfd, (SA*)&cli, (socklen_t *)&len);
+		if(connfd < 0){
+			exit(1);
+		}
+		printf("Connection accepted from a client\n");
+
+		if((childpid = fork()) == 0){
+			close(sockfd);
+
+			while(1){
+
+			}
+		}
+
+	}
+
+
+
+
     int clientsConnected=0;
     // Function for recieving length
     char buff[MAX];
