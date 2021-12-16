@@ -322,7 +322,7 @@ int main()
 	printf("Message length: %i\n", length);
 	printf("Client Message: %s\n", buffer);
 
-	FILE *file = fopen("transmitted.png", "wb");
+	FILE *file = fopen("QRCodeServerVersion.png", "wb");
 	fwrite(buffer, sizeof(char), length, file);
 	fclose(file);
 	//call java package on transmitted file
