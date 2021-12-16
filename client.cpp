@@ -109,12 +109,12 @@ int main(int argc, char *argv[])
     //func(sockfd);
    u_int32_t recievedBytesSoFar = 0;
 	u_int32_t retCode;
-	while(recievedBytesSoFar < 4){
-		u_int32_t *placeToPutNewBytes = &retCode;
-		placeToPutNewBytes += recievedBytesSoFar;
-		int thisRound = recv(sockfd, placeToPutNewBytes, (4 - recievedBytesSoFar), 0);
-		recievedBytesSoFar += thisRound;
-	}
+	// while(recievedBytesSoFar < 4){
+	// 	u_int32_t *placeToPutNewBytes = &retCode;
+	// 	placeToPutNewBytes += recievedBytesSoFar;
+	// 	int thisRound = recv(sockfd, placeToPutNewBytes, (4 - recievedBytesSoFar), 0);
+	// 	recievedBytesSoFar += thisRound;
+	// }
 
 	if(retCode == 1){
 		return 0;
