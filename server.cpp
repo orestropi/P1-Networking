@@ -159,7 +159,8 @@
 #define MAXREQUESTSTIMELIMIT 60
 int PORT =  2012;
 #define SA struct sockaddr
-   
+
+//Part of Driver code from https://www.geeksforgeeks.org/tcp-server-client-implementation-in-c/   
 // Function designed for chat between client and server.
 void func(int sockfd)
 {
@@ -191,7 +192,7 @@ void func(int sockfd)
     }
 }
    
-// Driver function
+// Main server code
 int main()
 {
     int sockfd, connfd, len;
