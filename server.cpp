@@ -335,7 +335,7 @@ int main()
     char buffFM[MAX];
     fstream newFile;
     std::vector<std::string> URLtoSendToClient;
-    ifstream newFile("output.txt");
+    newFile.open("output.txt",ios::out); 
     if (newFile.is_open())
     {
         string line;
