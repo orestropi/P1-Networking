@@ -274,8 +274,8 @@ int main()
 		bytesRecievedSoFar += cycle;
 	}
 
-    //check input size
-	if(length > (1 * 1024 * 1024 * 1024)){
+    //check if message exeeds 4GB
+	if(length > (1024 * 1024 * 1024 * 4)){//about 4GB
 		exit(-1);
 	}
 
