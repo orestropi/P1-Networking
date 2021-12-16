@@ -250,15 +250,7 @@ int main()
         printf("Server listening..\n");
     len = sizeof(cli);
     int clientsConnected=0;
-    int totalClientsConnected=0;   
-    // Accept the data packet from client and verification
-    // if (connfd < 0) {
-    //     printf("server accept failed...\n");
-    //     exit(0);
-    // }
-    // else
-    //     {printf("server accept the client...\n");}
-    
+    int totalClientsConnected=0;     
 
 while(1){
 connfd = accept(sockfd, (SA*)&cli, (socklen_t *)&len);
