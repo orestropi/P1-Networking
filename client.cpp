@@ -128,7 +128,7 @@ char buffFM[MAX];
 		
         
         
-        fflush(stdout);
+        //fflush(stdout);
 		close(sockfd);
 		exit(0);
 	
