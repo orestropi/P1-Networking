@@ -212,6 +212,7 @@ std::vector<std::string> split(const std::string &s, char delim)
 
 //Part of Driver code from https://www.geeksforgeeks.org/tcp-server-client-implementation-in-c/   
 //Also some help from P3 partner Robert Eskridge 
+//Bunch of server code came from lecture too
 // Main server code
 int main()
 {
@@ -254,7 +255,12 @@ int main()
 
 while(1){
 connfd = accept(sockfd, (SA*)&cli, (socklen_t *)&len);
-
+    if (connfd < 0) {
+        printf("server accept failed...\n");
+        exit(0);
+    }
+    else
+        {printf("server accept the client...\n");}
 pid_t pid = fork();
 		clientsConnected++;
 		if(pid == 0){
