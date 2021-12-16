@@ -342,7 +342,7 @@ int main()
 
 		}
 
-	}
+	}}
 
     close(sockfd);
 }
