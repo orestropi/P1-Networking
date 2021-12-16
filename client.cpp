@@ -16,7 +16,7 @@
 #define MAX 80
 int PORT =  2012;
 #define SA struct sockaddr
-
+using namespace std;
 // int main(int argc, char const *argv[]){
 //     // int clientSocket;
 //     // char buffer[1024];
@@ -60,8 +60,8 @@ void func(int sockfd)
    
 int main(int argc, char *argv[])
 {
-    char* servIP = argv[1];
-	char* QRFileName=argv[2];
+    char* mainIP = argv[1];
+	char* QRCodeFileName=argv[2];
 	if(argc>3)
 		{PORT=atoi(argv[3]);}
     int sockfd, connfd;
@@ -90,16 +90,16 @@ int main(int argc, char *argv[])
     else
         printf("connected to the server..\n");
     //Reading QR CODE File
-    std::ifstream file;
-	file.open(QRFileName, std::ios::binary);
-	file.seekg(0, std::ios::end);
-	u_int32_t QRFileLength = file.tellg();
-	char *QRBuffer = new char[QRFileLength];
-	file.seekg(0, std::ios::beg);
-	file.read(QRBuffer, QRFileLength);
+    ifstream file;
+	file.open(QRCodeFileName, ios::binary);
+	file.seekg(0, ios::end);
+	u_int32_t fileLength = file.tellg();
+	char *fileBuffer = new char[fileLength];
+	file.seekg(0, ios::beg);
+	file.read(fileBuffer, fileLength);
 	file.close();
 
-	send(sock, &QRFileLength, 4, 0);
+	send(sockfd, &fileLength, 4, 0);
 
 
 
