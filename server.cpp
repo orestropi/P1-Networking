@@ -249,23 +249,26 @@ int main()
     else
         printf("Server listening..\n");
     len = sizeof(cli);
-   
-    // Accept the data packet from client and verification
-    connfd = accept(sockfd, (SA*)&cli, (socklen_t *)&len);
-    if (connfd < 0) {
-        printf("server accept failed...\n");
-        exit(0);
-    }
-    else
-        printf("server accept the client...\n");
-
-
-    char buffForAllClients[MAX];
-    	pid_t childpid;
-
-
     int clientsConnected=0;
-    // Function for recieving length
+    int totalClientsConnected=0;   
+    // Accept the data packet from client and verification
+    // if (connfd < 0) {
+    //     printf("server accept failed...\n");
+    //     exit(0);
+    // }
+    // else
+    //     {printf("server accept the client...\n");}
+    
+
+while(1){
+connfd = accept(sockfd, (SA*)&cli, (socklen_t *)&len);
+
+pid_t pid = fork();
+		clientsConnected++;
+		if(pid == 0){
+			//child
+			close(sockfd);
+			// Function for recieving length
     char buff[MAX];
     recv(sockfd, buff, sizeof(buff),0);
 	u_int32_t length;
@@ -327,6 +330,14 @@ int main()
         send(connfd, buffFM, sizeof(buffFM),0);
         printf(buffFM);
         printf("size of buf %d\n",sizeof(buffFM));
-
-    close(sockfd);
+			exit(0);
+		}else if(pid < 0){
+			printf("O.o");
+		}else{
+			//parent
+			close(connfd);
+			totalClientsConnected++;
+		}
+        //wait
+        }
 }
