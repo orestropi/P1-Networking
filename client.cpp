@@ -115,14 +115,14 @@ int main(int argc, char *argv[])
 	// 	int thisRound = recv(sockfd, placeToPutNewBytes, (4 - recievedBytesSoFar), 0);
 	// 	recievedBytesSoFar += thisRound;
 	// }
-
-	if(retCode == 1){
-		return 0;
-	}else{        
-        char buffFM[MAX];
+char buffFM[MAX];
         bzero(buffFM, sizeof(buffFM));
         recv(sockfd, buffFM, sizeof(buffFM),0);
         printf(buffFM);
+	if(retCode == 1){
+		return 0;
+	}else{        
+        
 }
 
 		
