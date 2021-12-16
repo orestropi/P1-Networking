@@ -332,7 +332,7 @@ int main()
 
 
 
-    // char buffFM[MAX];
+    char buffFM[MAX];
     // fstream newFile;
     // std::vector<std::string> URLtoSendToClient;
     // newFile.open("output.txt",ios::out); 
