@@ -120,7 +120,7 @@ char buffFM[MAX];
         int counter = 0;
         while(counter==0){
         if(recv(sockfd, buffFM, sizeof(buffFM),0)>0){
-        printf(buffFM);
+        printf("This is the URL Recieved from the server: %s", buffFM);
         counter++;}
         }
 	if(retCode == 1){
