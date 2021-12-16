@@ -249,7 +249,9 @@ int main()
     else
         printf("Server listening..\n");
     len = sizeof(cli);
-   
+
+
+       int clientsConnected=0;
     // Accept the data packet from client and verification
     connfd = accept(sockfd, (SA*)&cli, (socklen_t *)&len);
     if (connfd < 0) {
@@ -274,17 +276,7 @@ int main()
 			close(sockfd);
 
 			while(1){
-
-			}
-		}
-
-	}
-
-
-
-
-    int clientsConnected=0;
-    // Function for recieving length
+// Function for recieving length
     char buff[MAX];
     recv(sockfd, buff, sizeof(buff),0);
 	u_int32_t length;
@@ -346,6 +338,11 @@ int main()
         send(connfd, buffFM, sizeof(buffFM),0);
         printf(buffFM);
         printf("size of buf %d\n",sizeof(buffFM));
+
+			}
+		}
+
+	}
 
     close(sockfd);
 }
