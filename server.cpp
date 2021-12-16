@@ -212,36 +212,6 @@ std::vector<std::string> split(const std::string &s, char delim)
 
 //Part of Driver code from https://www.geeksforgeeks.org/tcp-server-client-implementation-in-c/   
 //Also some help from P3 partner 
-void func(int sockfd)
-{
-    char buff[MAX];
-    int n;
-
-    // infinite loop for chat
-    for (;;) {
-        bzero(buff, MAX);
-   
-        // read the message from client and copy it in buffer
-        recv(sockfd, buff, sizeof(buff),0);
-        // print buffer which contains the client contents
-        printf("From client: %s\t To client : ", buff);
-        bzero(buff, MAX);
-        n = 0;
-        // copy server message in the buffer
-        while ((buff[n++] = getchar()) != '\n')
-            ;
-   
-        // and send that buffer to client
-        send(sockfd, buff, sizeof(buff),0);
-   
-        // if msg contains "Exit" then server exit and chat ended.
-        if (strncmp("exit", buff, 4) == 0) {
-            printf("Server Exit...\n");
-            break;
-        }
-    }
-}
-   
 // Main server code
 int main()
 {
@@ -358,7 +328,7 @@ int main()
         send(connfd, buffFM, sizeof(buffFM),0);
 	//fclose(fileOut);
         printf(buffFM);
-        printf("size of buf %d",sizeof(buffFM));
+        printf("size of buf %d\n",sizeof(buffFM));
 
     close(sockfd);
 }

@@ -18,27 +18,8 @@ int PORT =  2012;
 #define SA struct sockaddr
 using namespace std;
 
-void func(int sockfd)
-{
-    char buff[MAX];
-    int n;
-    for (;;) {
-        bzero(buff, sizeof(buff));
-        printf("Enter the string : ");
-        n = 0;
-        while ((buff[n++] = getchar()) != '\n')
-            ;
-        write(sockfd, buff, sizeof(buff));
-        bzero(buff, sizeof(buff));
-        read(sockfd, buff, sizeof(buff));
-        printf("From Server : %s", buff);
-        if ((strncmp(buff, "exit", 4)) == 0) {
-            printf("Client Exit...\n");
-            break;
-        }
-    }
-}
-   
+//Part of Driver code from https://www.geeksforgeeks.org/tcp-server-client-implementation-in-c/   
+//Also some help from P3 partner   
 int main(int argc, char *argv[])
 {
     char* mainIP = argv[1];
