@@ -348,11 +348,12 @@ int main()
             if (counter == 3)
             {
                 URLtoSendToClient = split(line, ' ');
-                strcpy(buffFM, URLtoSendToClient[0].c_str());
+                strcpy(buffFM, line.c_str());
             }
             counter++;
         }
     }
+//printf(URLtoSendToClient[0].c_str());
 
 
 
