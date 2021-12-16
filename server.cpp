@@ -339,8 +339,11 @@ int main()
       string tp;
       while(getline(newfile, tp)){ //read data from file object and put it into string.
          counter++;
-         if(counter==3){strcpy(buffFM, tp.c_str());}
-         cout << buffFM << "\n"; //print the data of the string
+         if(counter==3){strcpy(buffFM, tp.c_str());
+                  cout << buffFM << "heyooooo\n"; //print the data of the string
+}
+         cout << tp << "\n"; //print the data of the string
+         
       }
       newfile.close(); //close the file object.
    }
