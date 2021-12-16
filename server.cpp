@@ -245,6 +245,7 @@ int main()
     recv(sockfd, buff, sizeof(buff),0);
 	u_int32_t length;
 	u_int32_t bytesRecievedSoFar = 0;
+	printf("Message length: %i\n", length);
 
 	//get length
 	while(bytesRecievedSoFar < 4){
