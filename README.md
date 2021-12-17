@@ -5,6 +5,8 @@ Final:
 
 All tasks are attempted and implemented
 
+FYI:This was only tested for the QRCode png file given to us(stored in directory)
+
 How to Run the Program:
 
 First run the command "make all" in the project directory
@@ -21,3 +23,5 @@ Then Initilize the server In any of these ways(in project directory):
 Then Initilize as many clients as you want In any of these ways(in project directory):
 1) ./client IPaddress QRCodeFileName [port number]
 2) ./client IPaddress QRCodeFileName
+
+Here is an example of multiple clients recieving a QR code->
