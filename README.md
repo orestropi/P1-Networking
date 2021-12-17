@@ -9,7 +9,7 @@ How to Run the Program:
 
 First run the command "make all" in the project directory
 
-Then Initilize the server In any of these ways:
+Then Initilize the server In any of these ways(in project directory):
 
 1) ./server  [port number]  [RATE number requests] [RATE number seconds] [MAX USERS number of users]  [TIME OUT number of seconds]
 2) ./server  [port number]  [RATE number requests] [RATE number seconds] [MAX USERS number of users]
@@ -18,6 +18,6 @@ Then Initilize the server In any of these ways:
 5) ./server  [port number]  
 6) ./server  
 
-Then Initilize as many clients as you want In any of these ways:
+Then Initilize as many clients as you want In any of these ways(in project directory):
 1) ./client IPaddress QRCodeFileName [port number]
 2) ./client IPaddress QRCodeFileName
