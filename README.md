@@ -27,6 +27,11 @@ Then Initilize as many clients as you want In any of these ways(in project direc
 Here is an example of multiple clients recieving a QR code->
 ![image](https://user-images.githubusercontent.com/73619173/146481972-4fc41309-012f-4c13-9d59-bc663cc57934.png)
 
+Here is how the directory looks after two clients got their URLs:
+![image](https://user-images.githubusercontent.com/73619173/146482072-ec5217e3-a533-4976-8967-ace5d33825de.png)
+
+Here is the logging file output:
+![image](https://user-images.githubusercontent.com/73619173/146482215-1166ec3e-fef5-42db-97a0-92f2429e8981.png)
 
 Any Questions?
 Contact me at:
