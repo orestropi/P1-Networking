@@ -75,23 +75,33 @@ std::vector<std::string> split(const std::string &s, char delim)
 //Bunch of server code came from lecture too
 // Main server code
 int main(int argc, char *argv[])
-{   
-    if(argc>1)
-		{PORT=atoi(argv[1]);}    
+{
+    if (argc > 1)
+    {
+        PORT = atoi(argv[1]);
+    }
     //Opening up logs
     ofstream serverLogs;
-	serverLogs.open("LoggingForServer.txt", ios_base::app);
+    serverLogs.open("LoggingForServer.txt", ios_base::app);
     time_t time = chrono::system_clock::to_time_t(chrono::system_clock::now());
     serverLogs << "Server Initiated at port: " << PORT << ", during time " << ctime(&time) << endl;
 
-    if(argc>2)
-		{MAXREQUESTS=atoi(argv[2]);}
-    if(argc>3)
-		{MAXREQUESTSTIMELIMIT=atoi(argv[3]);}
-    if(argc>4)
-		{TIMEOUT=atoi(argv[4]);}
-    if(argc>5)
-		{MAXUSERS=atoi(argv[5]);}
+    if (argc > 2)
+    {
+        MAXREQUESTS = atoi(argv[2]);
+    }
+    if (argc > 3)
+    {
+        MAXREQUESTSTIMELIMIT = atoi(argv[3]);
+    }
+    if (argc > 4)
+    {
+        TIMEOUT = atoi(argv[4]);
+    }
+    if (argc > 5)
+    {
+        MAXUSERS = atoi(argv[5]);
+    }
 
     int sockfd, connfd, len;
     struct sockaddr_in servaddr, cli;
@@ -104,7 +114,9 @@ int main(int argc, char *argv[])
         exit(0);
     }
     else
-        {printf("Socket successfully created..\n");}
+    {
+        printf("Socket successfully created..\n");
+    }
     bzero(&servaddr, sizeof(servaddr));
 
     // assign IP, PORT
@@ -136,23 +148,39 @@ int main(int argc, char *argv[])
     while (1)
     {
         //logging - Dont allow more than max users to use our program at once, the program will not let the client connect until someonelse is done
-        if(clientsConnected>MAXUSERS){            time = chrono::system_clock::to_time_t(chrono::system_clock::now());
-            serverLogs << "Max Users exceeded at time: " << ctime(&time) << endl;}
+        if (clientsConnected > MAXUSERS)
+        {
+            time = chrono::system_clock::to_time_t(chrono::system_clock::now());
+            serverLogs << "Max Users exceeded at time: " << ctime(&time) << endl;
+        }
         //Dont allow more than max users to use our program at once, the program will not let the client connect until someonelse is done
-        while(clientsConnected>MAXUSERS){}
-        int messagesRecievedWithinTimeFrame= 0;
+        while (clientsConnected > MAXUSERS)
+        {
+        }
+        int messagesRecievedWithinTimeFrame = 0;
         //Rate limiting implemented by every MAXREQUESTSTIMELIMIT seconds, reseting the amount we have sent back to 0
-              chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
-    //Logging Rate Limiting
-    if(MAXREQUESTS<messagesRecievedWithinTimeFrame){            
-        time = chrono::system_clock::to_time_t(chrono::system_clock::now());
-        serverLogs << "Rate limit violated with IP: " << inet_ntoa(cli.sin_addr) << ", during time " << ctime(&time) << endl;}
-    if(std::chrono::steady_clock::now() - start > std::chrono::seconds(MAXREQUESTSTIMELIMIT)){messagesRecievedWithinTimeFrame= 0;}
-    //We wait till we can send more messages
-    while(MAXREQUESTS<messagesRecievedWithinTimeFrame){if(std::chrono::steady_clock::now() - start > std::chrono::seconds(MAXREQUESTSTIMELIMIT)){messagesRecievedWithinTimeFrame= 0;}}
-    //TIMEOUT functionality
-    //if(clientConnectedForMoreThen TIMEOUT){disconect client}
-    //Log this event
+        chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
+        //Logging Rate Limiting
+        if (MAXREQUESTS < messagesRecievedWithinTimeFrame)
+        {
+            time = chrono::system_clock::to_time_t(chrono::system_clock::now());
+            serverLogs << "Rate limit violated with IP: " << inet_ntoa(cli.sin_addr) << ", during time " << ctime(&time) << endl;
+        }
+        if (std::chrono::steady_clock::now() - start > std::chrono::seconds(MAXREQUESTSTIMELIMIT))
+        {
+            messagesRecievedWithinTimeFrame = 0;
+        }
+        //We wait till we can send more messages
+        while (MAXREQUESTS < messagesRecievedWithinTimeFrame)
+        {
+            if (std::chrono::steady_clock::now() - start > std::chrono::seconds(MAXREQUESTSTIMELIMIT))
+            {
+                messagesRecievedWithinTimeFrame = 0;
+            }
+        }
+        //TIMEOUT functionality
+        //if(clientConnectedForMoreThen TIMEOUT){disconect client}
+        //Log this event
         connfd = accept(sockfd, (SA *)&cli, (socklen_t *)&len);
         if (connfd < 0)
         {
@@ -170,8 +198,8 @@ int main(int argc, char *argv[])
         if (pid == 0)
         {
             //child
-        time = chrono::system_clock::to_time_t(chrono::system_clock::now());
-        serverLogs << "Connection closed with client with IP: " << inet_ntoa(cli.sin_addr) << ", during time " << ctime(&time) << endl;
+            time = chrono::system_clock::to_time_t(chrono::system_clock::now());
+            serverLogs << "Connection closed with client with IP: " << inet_ntoa(cli.sin_addr) << ", during time " << ctime(&time) << endl;
             close(sockfd);
             // Function for recieving length
             char buff[MAX];
@@ -255,7 +283,6 @@ int main(int argc, char *argv[])
             totalClientsConnected++;
         }
         //wait
-    }	
+    }
     serverLogs.close();
-
 }
