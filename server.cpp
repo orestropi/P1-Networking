@@ -40,10 +40,12 @@
 
 using namespace std;
 
+//defaults for security features
 int MAX = 1000;
 int MAXREQUESTS = 3;
 int MAXREQUESTSTIMELIMIT = 60;
 int TIMEOUT = 60;
+int MAXUSERS = 3;
 int PORT = 2012;
 #define SA struct sockaddr
 
@@ -70,8 +72,19 @@ std::vector<std::string> split(const std::string &s, char delim)
 //Also some help from P3 partner Robert Eskridge
 //Bunch of server code came from lecture too
 // Main server code
-int main()
+int main(int argc, char *argv[])
 {
+    if(argc>1)
+		{PORT=atoi(argv[1]);}
+    if(argc>2)
+		{MAXREQUESTS=atoi(argv[2]);}
+    if(argc>3)
+		{MAXREQUESTSTIMELIMIT=atoi(argv[3]);}
+    if(argc>4)
+		{TIMEOUT=atoi(argv[4]);}
+    if(argc>5)
+		{MAXUSERS=atoi(argv[5]);}
+
     int sockfd, connfd, len;
     struct sockaddr_in servaddr, cli;
 
@@ -114,6 +127,8 @@ int main()
 
     while (1)
     {
+        //Dont allow more than max users to use our program at once
+        while(clientsConnected>MAXUSERS){}
         connfd = accept(sockfd, (SA *)&cli, (socklen_t *)&len);
         if (connfd < 0)
         {
@@ -195,6 +210,8 @@ int main()
             send(connfd, buffFM, sizeof(buffFM), 0);
             printf(buffFM);
             printf("size of buf %d\n", sizeof(buffFM));
+            //Client not connected anymore
+            clientsConnected--;
             exit(0);
         }
         else if (pid < 0)
