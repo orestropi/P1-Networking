@@ -76,11 +76,14 @@ std::vector<std::string> split(const std::string &s, char delim)
 // Main server code
 int main(int argc, char *argv[])
 {   
-    //Opening up logs
-    std::ofstream adminLog;
-	adminLog.open("Log.txt", std::ios_base::app);
     if(argc>1)
-		{PORT=atoi(argv[1]);}
+		{PORT=atoi(argv[1]);}    
+    //Opening up logs
+    ofstream serverLogs;
+	serverLogs.open("LoggingForServer.txt", ios_base::app);
+    time_t time = chrono::system_clock::to_time_t(chrono::system_clock::now());
+    serverLogs << "Server Initiated at port: " << PORT << ", during time " << ctime(&time) << endl;
+
     if(argc>2)
 		{MAXREQUESTS=atoi(argv[2]);}
     if(argc>3)
@@ -241,5 +244,6 @@ int main(int argc, char *argv[])
             totalClientsConnected++;
         }
         //wait
-    }
+    }	serverLogs.close();
+
 }
