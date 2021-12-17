@@ -104,7 +104,7 @@ int main(int argc, char *argv[])
         exit(0);
     }
     else
-        printf("Socket successfully created..\n");
+        {printf("Socket successfully created..\n");}
     bzero(&servaddr, sizeof(servaddr));
 
     // assign IP, PORT
@@ -135,11 +135,18 @@ int main(int argc, char *argv[])
 
     while (1)
     {
+        //logging - Dont allow more than max users to use our program at once, the program will not let the client connect until someonelse is done
+        if(clientsConnected>MAXUSERS){            time = chrono::system_clock::to_time_t(chrono::system_clock::now());
+            serverLogs << "Max Users exceeded at time: " << ctime(&time) << endl;}
         //Dont allow more than max users to use our program at once, the program will not let the client connect until someonelse is done
         while(clientsConnected>MAXUSERS){}
         int messagesRecievedWithinTimeFrame= 0;
         //Rate limiting implemented by every MAXREQUESTSTIMELIMIT seconds, reseting the amount we have sent back to 0
               chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
+    //Logging Rate Limiting
+    if(MAXREQUESTS<messagesRecievedWithinTimeFrame){            
+        time = chrono::system_clock::to_time_t(chrono::system_clock::now());
+        serverLogs << "Rate limit violated with IP: " << inet_ntoa(cli.sin_addr) << ", during time " << ctime(&time) << endl;}
     if(std::chrono::steady_clock::now() - start > std::chrono::seconds(MAXREQUESTSTIMELIMIT)){messagesRecievedWithinTimeFrame= 0;}
     //We wait till we can send more messages
     while(MAXREQUESTS<messagesRecievedWithinTimeFrame){if(std::chrono::steady_clock::now() - start > std::chrono::seconds(MAXREQUESTSTIMELIMIT)){messagesRecievedWithinTimeFrame= 0;}}
@@ -155,12 +162,16 @@ int main(int argc, char *argv[])
         else
         {
             printf("server accept the client...\n");
+            time = chrono::system_clock::to_time_t(chrono::system_clock::now());
+            serverLogs << "Connection to client with IP: " << inet_ntoa(cli.sin_addr) << ", during time " << ctime(&time) << endl;
         }
         pid_t pid = fork();
         clientsConnected++;
         if (pid == 0)
         {
             //child
+        time = chrono::system_clock::to_time_t(chrono::system_clock::now());
+        serverLogs << "Connection closed with client with IP: " << inet_ntoa(cli.sin_addr) << ", during time " << ctime(&time) << endl;}
             close(sockfd);
             // Function for recieving length
             char buff[MAX];
@@ -244,6 +255,7 @@ int main(int argc, char *argv[])
             totalClientsConnected++;
         }
         //wait
-    }	serverLogs.close();
+    }	
+    serverLogs.close();
 
 }
