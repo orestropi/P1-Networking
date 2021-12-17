@@ -171,7 +171,7 @@ int main(int argc, char *argv[])
         {
             //child
         time = chrono::system_clock::to_time_t(chrono::system_clock::now());
-        serverLogs << "Connection closed with client with IP: " << inet_ntoa(cli.sin_addr) << ", during time " << ctime(&time) << endl;}
+        serverLogs << "Connection closed with client with IP: " << inet_ntoa(cli.sin_addr) << ", during time " << ctime(&time) << endl;
             close(sockfd);
             // Function for recieving length
             char buff[MAX];
