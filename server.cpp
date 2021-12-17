@@ -266,7 +266,7 @@ int main(int argc, char *argv[])
                 outCheck.close();
             }
 
-            printf("starting response\n");
+            printf("sending URL back to client...\n");
             //send back to client
             send(connfd, buffFM, sizeof(buffFM), 0);
             printf(buffFM);
