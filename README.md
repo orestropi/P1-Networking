@@ -25,3 +25,11 @@ Then Initilize as many clients as you want In any of these ways(in project direc
 2) ./client IPaddress QRCodeFileName
 
 Here is an example of multiple clients recieving a QR code->
+
+
+Any Questions?
+Contact me at:
+phone:857-928-3387
+email:oropi@wpi.edu
+discord:Orest#5659
+and/or make an instruct assist forum post
