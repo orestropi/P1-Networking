@@ -73,7 +73,7 @@ std::vector<std::string> split(const std::string &s, char delim)
 //Also some help from P3 partner Robert Eskridge
 //Xirema on stack overflow was helpful with some of the clock functions
 //Bunch of server code came from lecture too
-// Main server code
+//Main server code
 int main(int argc, char *argv[])
 {
     if (argc > 1)
