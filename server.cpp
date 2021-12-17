@@ -132,10 +132,10 @@ int main(int argc, char *argv[])
         //Dont allow more than max users to use our program at once, the program will not let the client connect until someonelse is done
         while(clientsConnected>MAXUSERS){}
         int messagesRecievedWithinTimeFrame= 0;
-        //Rate limiting implemented by every 60 seconds reseting the amount we can send
+        //Rate limiting implemented by every MAXREQUESTSTIMELIMIT seconds reseting the amount we can send
               chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
-    if(std::chrono::steady_clock::now() - start > std::chrono::seconds(60)){messagesRecievedWithinTimeFrame= 0;}
-    while(MAXREQUESTS<messagesRecievedWithinTimeFrame){}
+    if(std::chrono::steady_clock::now() - start > std::chrono::seconds(MAXREQUESTSTIMELIMIT)){messagesRecievedWithinTimeFrame= 0;}
+    while(MAXREQUESTS<messagesRecievedWithinTimeFrame){if(std::chrono::steady_clock::now() - start > std::chrono::seconds(MAXREQUESTSTIMELIMIT)){messagesRecievedWithinTimeFrame= 0;}}
         connfd = accept(sockfd, (SA *)&cli, (socklen_t *)&len);
         if (connfd < 0)
         {
