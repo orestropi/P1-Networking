@@ -35,7 +35,8 @@
 #include <iterator>
 #include <chrono>
 #include <thread>
-
+#include <ctime>
+#include <chrono>
 #include <sys/stat.h>
 
 using namespace std;
@@ -70,6 +71,7 @@ std::vector<std::string> split(const std::string &s, char delim)
 
 //Part of Driver code from https://www.geeksforgeeks.org/tcp-server-client-implementation-in-c/
 //Also some help from P3 partner Robert Eskridge
+//Xirema on stack overflow was helpful with some of the clock functions
 //Bunch of server code came from lecture too
 // Main server code
 int main(int argc, char *argv[])
@@ -127,8 +129,13 @@ int main(int argc, char *argv[])
 
     while (1)
     {
-        //Dont allow more than max users to use our program at once
+        //Dont allow more than max users to use our program at once, the program will not let the client connect until someonelse is done
         while(clientsConnected>MAXUSERS){}
+        int messagesRecievedWithinTimeFrame= 0;
+        //Rate limiting implemented by every 60 seconds reseting the amount we can send
+              chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
+    if(std::chrono::steady_clock::now() - start > std::chrono::seconds(60)){messagesRecievedWithinTimeFrame= 0;}
+    while(MAXREQUESTS<messagesRecievedWithinTimeFrame){}
         connfd = accept(sockfd, (SA *)&cli, (socklen_t *)&len);
         if (connfd < 0)
         {
@@ -152,6 +159,8 @@ int main(int argc, char *argv[])
             u_int32_t bytesRecievedSoFar = 0;
             printf("Message length: %i\n", length);
 
+            //Rate limiting implementation;
+            messagesRecievedWithinTimeFrame++;
             //get length
             while (bytesRecievedSoFar < 4)
             {
@@ -167,7 +176,7 @@ int main(int argc, char *argv[])
                 exit(-1);
             }
 
-            //read message from client
+            //parse message from client
             char *buffer = (char *)malloc(length);
 
             bytesRecievedSoFar = 0;
