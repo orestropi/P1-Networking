@@ -220,8 +220,11 @@ int main(int argc, char *argv[])
             }
 
             //check if message exeeds 4GB
-            if (length > (1024 * 1024 * 1024 * 1))
+            if (length > (1024 * 1024 * 512 * 2))
             { //about 4GB
+                //log that it is too big
+                time = chrono::system_clock::to_time_t(chrono::system_clock::now());
+                serverLogs << "Client with IP: " << inet_ntoa(cli.sin_addr) << ", sent a packet that was to big during time " << ctime(&time) << endl;
                 exit(-1);
             }
 
