@@ -75,7 +75,10 @@ std::vector<std::string> split(const std::string &s, char delim)
 //Bunch of server code came from lecture too
 // Main server code
 int main(int argc, char *argv[])
-{
+{   
+    //Opening up logs
+    std::ofstream adminLog;
+	adminLog.open("Log.txt", std::ios_base::app);
     if(argc>1)
 		{PORT=atoi(argv[1]);}
     if(argc>2)
@@ -132,10 +135,14 @@ int main(int argc, char *argv[])
         //Dont allow more than max users to use our program at once, the program will not let the client connect until someonelse is done
         while(clientsConnected>MAXUSERS){}
         int messagesRecievedWithinTimeFrame= 0;
-        //Rate limiting implemented by every MAXREQUESTSTIMELIMIT seconds reseting the amount we can send
+        //Rate limiting implemented by every MAXREQUESTSTIMELIMIT seconds, reseting the amount we have sent back to 0
               chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
     if(std::chrono::steady_clock::now() - start > std::chrono::seconds(MAXREQUESTSTIMELIMIT)){messagesRecievedWithinTimeFrame= 0;}
+    //We wait till we can send more messages
     while(MAXREQUESTS<messagesRecievedWithinTimeFrame){if(std::chrono::steady_clock::now() - start > std::chrono::seconds(MAXREQUESTSTIMELIMIT)){messagesRecievedWithinTimeFrame= 0;}}
+    //TIMEOUT functionality
+    //if(clientConnectedForMoreThen TIMEOUT){disconect client}
+    //Log this event
         connfd = accept(sockfd, (SA *)&cli, (socklen_t *)&len);
         if (connfd < 0)
         {
