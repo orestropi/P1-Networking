@@ -25,6 +25,7 @@ Then Initilize as many clients as you want In any of these ways(in project direc
 2) ./client IPaddress QRCodeFileName
 
 Here is an example of multiple clients recieving a QR code->
+![image](https://user-images.githubusercontent.com/73619173/146481972-4fc41309-012f-4c13-9d59-bc663cc57934.png)
 
 
 Any Questions?
