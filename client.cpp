@@ -19,7 +19,6 @@ int PORT = 2012;
 using namespace std;
 
 //Part of Driver code from https://www.geeksforgeeks.org/tcp-server-client-implementation-in-c/
-//Also some help from P3 partner   Robert Eskridge
 int main(int argc, char *argv[])
 {
     char *mainIP = argv[1];
