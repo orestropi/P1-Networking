@@ -1,11 +1,4 @@
 # P1-Networking
-https://ia.wpi.edu/cs3516/resources.php?page=show_project&id=7
-
-Final:
-
-All tasks are attempted and implemented
-
-FYI:This was only tested for the QRCode png file given to us(stored in directory)
 
 How to Run the Program:
 
@@ -38,4 +31,4 @@ Contact me at:
 phone:857-928-3387
 email:oropi@wpi.edu
 discord:Orest#5659
-and/or make an instruct assist forum post
+
