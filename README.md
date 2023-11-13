@@ -36,10 +36,10 @@ More Details:
 1. Server Initialization:
    - The server listens on a specified port 
    - It supports command-line arguments to configure various parameters:
-- maximum number of concurrent users
-- maximum requests
-- request time limit
-- timeout for client connections.
+      - maximum number of concurrent users
+      - maximum requests
+      - request time limit
+      - timeout for client connections.
 
 2. Security Features:
    - The code includes parameters and settings for security features like maximum request limits, timeouts, and maximum user connections.
