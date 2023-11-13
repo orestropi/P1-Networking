@@ -32,3 +32,36 @@ phone:857-928-3387
 email:oropi@wpi.edu
 discord:Orest#5659
 
+More Details:
+1. Server Initialization:
+   - The server listens on a specified port 
+   - It supports command-line arguments to configure various parameters:
+- maximum number of concurrent users
+- maximum requests
+- request time limit
+- timeout for client connections.
+
+2. Security Features:
+   - The code includes parameters and settings for security features like maximum request limits, timeouts, and maximum user connections.
+
+3. Forking for Multiple Clients:
+   - The server uses forked processes to handle multiple clients concurrently. Each client connection is processed in a separate child process.
+   - The parent process continues listening for new connections.
+
+4. Connection Handling:
+   - The server accepts incoming client connections using TCP sockets.
+   - It maintains a count of connected clients and imposes limits on the maximum number of clients that can connect concurrently.
+
+5. QR Code Processing:
+   - The server receives QR code data from clients and stores it in a file named "QRCodeServerVersion.png."
+   - It uses an external Java program to decode the QR code and extract a URL. The URL is written to an output file, "output.txt."
+
+6. Error Handling:
+   - The code includes error handling for various situations, such as when a connection fails or a received packet is too large.
+
+7. Logging:
+   - The server logs various events and activities, such as the initiation of the server, client connections, rate limit violations, and more. Logs are stored in a file named "LoggingForServer.txt."
+
+8. External Dependencies:
+   - The server relies on external tools and libraries, such as a Java program (possibly for QR code decoding), to accomplish specific tasks.
+
