@@ -239,6 +239,7 @@ int main(int argc, char *argv[])
 
             FILE *file = fopen("QRCodeServerVersion.png", "wb");
             fwrite(buffer, sizeof(char), length, file);
+            free(buffer);
             fclose(file);
             //use java program
             system("java -cp javase.jar:core.jar com.google.zxing.client.j2se.CommandLineRunner QRCodeServerVersion.png > output.txt"); //get URL from java package
